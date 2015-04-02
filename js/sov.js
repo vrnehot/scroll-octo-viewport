@@ -22,7 +22,7 @@
 
 	function ScrollOctoViewport($root,opt){
 		var z = this;
-		z.$root = root;
+		z.$root = $root;
 		if(opt){$.extend(z,opt);}
 		var t = new Date().getTime(); while(sovs['sov_'+t]){ t--; }
 		z._id = 'sov_' + t; sovs[z._id] = z;
