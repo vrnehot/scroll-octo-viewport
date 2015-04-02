@@ -1,7 +1,6 @@
 (function(window,$,und){
 	var sovs = {};
-	var hb = $('html,body');
-	var $b = $('body');
+	var hb,$b;
 	var isTouchDevice = /(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/.test(navigator.userAgent);
 	var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
 
@@ -21,6 +20,8 @@
 	/*helpers*/
 
 	function ScrollOctoViewport($root,opt){
+		if(!hb){hb = $('html,body');}
+		if(!$b){$b = $('body');}
 		var z = this;
 		z.$root = $root;
 		if(opt){$.extend(z,opt);}
@@ -46,6 +47,7 @@
 			var z = this;
 			z.sizeX = $b.innerWidth();
 			z.sizeY = $b.innerHeight();
+
 			z.$items.each(function(){
 				this.style.width = z.sizeX + 'px';
 				this.style.height = z.sizeY + 'px';
