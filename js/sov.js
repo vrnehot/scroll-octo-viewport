@@ -17,6 +17,7 @@
 		}
 		return pos;
 	}
+	function getViewportSize(w){ w = w || window; if (w.innerWidth != null) return { w: w.innerWidth, h: w.innerHeight }; var d = w.document; if (document.compatMode == "CSS1Compat") return { w: d.documentElement.clientWidth, h: d.documentElement.clientHeight }; return { w: d.body.clientWidth, h: d.body.clientHeight }; }
 	/*helpers*/
 
 	function ScrollOctoViewport($root,opt){
@@ -44,9 +45,10 @@
 			else{ hb.scrollTop(z.start+top); }
 		}
 		, resizeHandler:function(){
-			var z = this;
-			z.sizeX = $b.innerWidth();
-			z.sizeY = $b.innerHeight();
+			var z = this,vp = getViewportSize();
+
+			z.sizeX = vp.w;
+			z.sizeY = vp.h;
 
 			z.$items.each(function(){
 				this.style.width = z.sizeX + 'px';
