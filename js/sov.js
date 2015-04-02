@@ -32,7 +32,7 @@
 		z.$items = z.$root.find(z.items);
 		z.resizeHandler();
 
-		hb.on('resize.'+z._id,function(e){z.resizeHandler(e);});
+		$win.on('resize.'+z._id,function(e){z.resizeHandler(e);});
 	}
 	function sov(opt){ return new fn.init(this,opt); }
 	var fn = {
@@ -46,7 +46,17 @@
 			if(z.scrollInner){ z.$root.scrollTop(top); }
 			else{ hb.scrollTop(z.start+top); }
 		}
+		, scrollTo:function(val){
+			//перейти к слайду с анимацией
+		}
+		, enterArea:function(){
+			// установить хендлеры
+		}
+		, leaveArea:function(){
+			// снять хендлеры
+		}
 		, resizeHandler:function(){
+			console.log('resizeHandler');
 			var z = this,vp = getViewportSize();
 
 			z.sizeX = $win.innerWidth();
@@ -68,6 +78,10 @@
 		, keyboardHandler:function(e){}
 		, touchHandler:function(e){}
 		, hashHandler:function(e){}
+		, inactiveHandler:function(e){
+			// работает когда вп покидает зону обстрела
+			// и если вп опять в нее попадает вызывает функцию входа
+		}
 	};
 	$.extend(fn.init.prototype,fn);
 	$.fn.sov = sov;
