@@ -1,6 +1,6 @@
 (function(window,$,und){
 	var sovs = {};
-	var hb,$b;
+	var hb,$b,$win = $(window);
 	var isTouchDevice = /(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/.test(navigator.userAgent);
 	var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
 
@@ -47,12 +47,15 @@
 		, resizeHandler:function(){
 			var z = this,vp = getViewportSize();
 
-			z.sizeX = vp.w;
-			z.sizeY = vp.h;
+			z.sizeX = $win.innerWidth();
+			z.sizeY = $win.innerHeight();
 
 			z.$items.each(function(){
 				this.style.width = z.sizeX + 'px';
 				this.style.height = z.sizeY + 'px';
+				this.style.padding = 0 + 'px';
+				this.style.margin = 0 + 'px';
+				this.style.border = 'none';
 			});
 			// change page dim
 			// change checkpoints
