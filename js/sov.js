@@ -20,17 +20,16 @@
 	/*helpers*/
 
 
-	function sov(opt){ return new fn.init(this,opt); }
+	function sov(opt){ console.info('Я ващет работаю'); return new fn.init(this,opt); }
 	var fn = {
 		init:function(root,opt){
+			console.info('Сомнения ',z.root);
 			var z = this;
 			z.root = root;
 			z.$root = $(root);
 			if(opt){$.extend(z,opt);}
 			var t = new Date().getTime(); while(!sovs['sov_'+t]){ t--; }
 			z._id = 'sov_' + t; sovs[z._id] = z;
-
-			console.info('Сомнения ',z.root);
 		}
 		, getInstance:function(id){
 			if(id){ return sovs[id]; }
