@@ -32,7 +32,7 @@
 		z.$items = z.$root.find(z.items);
 		z.resizeHandler();
 
-		$hb.on('resize.'+z._id,function(e){z.resizeHandler(e);});
+		hb.on('resize.'+z._id,function(e){z.resizeHandler(e);});
 	}
 	function sov(opt){ return new fn.init(this,opt); }
 	var fn = {
