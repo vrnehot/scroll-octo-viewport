@@ -31,6 +31,8 @@
 
 		z.$items = z.$root.find(z.items);
 		z.resizeHandler();
+
+		$hb.on('resize.'+z._id,function(e){z.resizeHandler(e);});
 	}
 	function sov(opt){ return new fn.init(this,opt); }
 	var fn = {
@@ -57,6 +59,8 @@
 				this.style.margin = 0 + 'px';
 				this.style.border = 'none';
 			});
+
+			z.start = z.$root.offset().top;
 			// change page dim
 			// change checkpoints
 		}
