@@ -1,6 +1,7 @@
 (function(window,$,und){
 	var sovs = {};
 	var hb = $('html,body');
+	var $b = $('body');
 	var isTouchDevice = /(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/.test(navigator.userAgent);
 	var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
 
@@ -19,20 +20,19 @@
 	}
 	/*helpers*/
 
+	function ScrollOctoViewport($root,opt){
+		var z = this;
+		z.$root = root;
+		if(opt){$.extend(z,opt);}
+		var t = new Date().getTime(); while(sovs['sov_'+t]){ t--; }
+		z._id = 'sov_' + t; sovs[z._id] = z;
 
-	function sov(opt){ console.info('Я ващет работаю'); return new fn.init(this,opt); }
+		z.$items = z.$root.find(z.items);
+		z.resizeHandler();
+	}
+	function sov(opt){ return new fn.init(this,opt); }
 	var fn = {
-		init:function(root,opt){
-			var z = this;
-			z.root = root;
-			console.info('Сомнения ',z.root);
-			z.$root = $(root);
-			if(opt){$.extend(z,opt);}
-			console.info('после инъекции опций ');
-			var t = new Date().getTime(); while(sovs['sov_'+t]){ t--; }
-			z._id = 'sov_' + t; sovs[z._id] = z;
-			console.info('Я нашел эту ебаную ошибку!!! Циклы не прощают!');
-		}
+		init:ScrollOctoViewport
 		, getInstance:function(id){
 			if(id){ return sovs[id]; }
 			else{ return z; }
@@ -43,8 +43,15 @@
 			else{ hb.scrollTop(z.start+top); }
 		}
 		, resizeHandler:function(){
+			var z = this;
+			z.sizeX = $b.innerWidth();
+			z.sizeY = $b.innerHeight();
+			z.$items.each(function(){
+				this.style.width = z.sizeX + 'px';
+				this.style.height = z.sizeY + 'px';
+			});
 			// change page dim
-			// chane checkpoints
+			// change checkpoints
 		}
 		, wheelHandler:function(e){}
 		, keyboardHandler:function(e){}
